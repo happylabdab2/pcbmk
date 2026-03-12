@@ -1,4 +1,2 @@
 Credit where due, thank you for helping out!
 
-lunasvg, C++ SVG library: https://github.com/sammycage/lunasvg
- - lunasvg.txt

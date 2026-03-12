@@ -4,9 +4,6 @@
 #include <vector>
 #include <string>
 
-#include <svgpp/svgpp.hpp>
-
-using namespace svgpp;
 using namespace std;
 
 std::string trim(const std::string &s)
