@@ -5,16 +5,17 @@
 #include <string>
 #include <tuple>
 #include <cmath>
-// #include <fmt/base.h>
+#include <fmt/core.h>
 
 using namespace std;
+using namespace fmt;
 
 class LibSVG
 {
 public:
     void addCircle(int radius, int x, int y, string fill = "orange") // Draw a graphic
     {
-        file.append(format(R"(<circle cx="{}" cy="{}" r="{}" fill="{}}">)", x, y, radius, fill));
+        file.append(format(R"(<circle cx="{}" cy="{}" r="{}" fill="{}">)", x, y, radius, fill));
     }
 
     // linear interpolation mode
@@ -71,12 +72,18 @@ public:
 
         if (!isLinearInterpolation) // arc mode
         {
-            file.append(format(R"(<ellipse cx="{}" cy="{}" rx="{}" ry="{}" fill="{}}">)", xPos, yPos, x, y, StrokeWidth));
+            file.append(format(R"(<ellipse cx="{}" cy="{}" rx="{}" ry="{}" fill="{}">)", xPos, yPos, x, y, StrokeWidth));
         }
     }
 
     void D03(double x, double y) // Places current shape (Aperture) - flash operation
     {
+
+    }
+
+    void D(int id)
+    {
+        flashApertureID = id;
     }
 
     void G02()
@@ -90,7 +97,11 @@ public:
     }
 
     void G75() // dev note: idc, This command must be issued before the first circular interpolation operation, for compatibility with older Gerber versions
+    {}
+
+    void LP()
     {
+
     }
 
 private:
@@ -105,10 +116,18 @@ private:
     int yDecimal = 1;
     int yInt = 1;
 
+    string objectBuffer; 
+    
     std::map<int, tuple<char, double, tuple<>>> apertureID;
+
+    int flashApertureID;
 
     bool isLinearInterpolation = true;
 
     bool isCircularInterpolation = false;
     bool isCircularInterpolationClockwise = true;
+
+    bool hasTransformation = false;
+
+    bool isClearPolarity = true;
 };

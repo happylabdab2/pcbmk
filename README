@@ -1,0 +1,11 @@
+# A Simple C++ PCB Gcode Generator
+
+By converting grb file into a more managable svg, then to gcode, we create simple to understand but powerfull pcb software.
+
+## Usage
+
+This project depends on **libfmt**, use this to pull the repo:
+
+```
+git submodule update --remote --merge
+```
